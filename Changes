@@ -1,0 +1,5 @@
+Revision history for WWW-CPAN.
+
+0.001    Wed Dec 26 2007
+        - first CPAN release
+        - new() and fetch_distmeta() is the whole API

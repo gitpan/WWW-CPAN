@@ -1,0 +1,59 @@
+
+=head1 NAME
+
+WWW::CPAN - CPAN as a web service
+
+=head1 SYNOPSIS
+
+  use WWW::CPAN;
+
+  $meta = WWW::CPAN->fetch_distmeta('Error');
+
+  $cpan = WWW::CPAN->new;
+  $meta = $cpan->fetch_distmeta({ dist => 'Error' });
+  $meta = $cpan->fetch_distmeta({ dist => 'Error-0.13', });
+  $meta = $cpan->fetch_distmeta({ dist => 'Error', version => '0.13' }); # same as above
+  $meta = $cpan->fetch_distmeta({ dist => 'Error', author => 'GBARR', format => 'json' });
+
+=head1 DESCRIPTION
+
+Blame Schwern.
+
+  [LINK HERE]
+
+Just kidding. I just appropriated Schwern's idea
+and Graham's work. I am lazy -- but that's supposed
+to be a quality.
+
+---
+
+  Message-ID: <47706655.60109@pobox.com>
+  Date: Mon, 24 Dec 2007 18:09:25 -0800
+  From: Michael G Schwern <schwern@pobox.com>
+  To: List - Module-Build <module-build@perl.org>, 
+   Graham Barr <gbarr@pobox.com>
+  Subject: META.json:  CPAN as a web service
+
+  I asked Graham if he'd consider providing META.json auto-conversion for
+  META.yml files so we can start playing with CPAN data in Javascript.
+
+  Well here you are:
+  http://search.cpan.org/meta/Error/META.json
+
+  Specific versions work:
+  http://search.cpan.org/meta/Error-0.17009/META.json
+
+  You can request the META file as YAML:
+  http://search.cpan.org/meta/Error/META.yml
+
+  And even ask for information about the last release of a distribution by a
+  particular author.
+  http://search.cpan.org/meta/gbarr/Error/META.yml
+
+  As a special bonus feature, Graham added auto generation of META for
+  distributions which don't have them!  For example, that last META file.  It
+  includes bonus information like the CPAN Forum, Testers, Tools and rt.cpan.org
+  resource links.
+
+  CPAN distribution data is now available as a web service.  Everybody say
+  "thank you, Graham"!

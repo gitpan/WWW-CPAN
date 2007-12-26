@@ -1,0 +1,10 @@
+Makefile.PL
+README
+Changes
+MANIFEST			This list of files
+
+lib/WWW/CPAN.pm
+lib/WWW/CPAN.pod
+
+t/01use.t
+META.yml                                 Module meta-data (added by MakeMaker)
