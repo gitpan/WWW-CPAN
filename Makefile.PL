@@ -13,6 +13,8 @@ WriteMakefile(
     'LWP::UserAgent'   => 0,
     'parent'           => 0,
     'Class::Accessor'  => 0,
+    'Class::Constructor::Factory' => 0.001,
+    'Carp'             => 0,
 
     'JSON::Any'        => 0,
 
@@ -21,6 +23,7 @@ WriteMakefile(
   },
   LICENSE => 'perl',
   AUTHOR  => 'Adriano R. Ferreira <ferreira@cpan.org>',
-  
+  ABSTRACT_FROM => 'lib/WWW/CPAN.pod',
+
 );
 

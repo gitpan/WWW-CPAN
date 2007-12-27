@@ -29,9 +29,9 @@ to be a quality.
 
   Message-ID: <47706655.60109@pobox.com>
   Date: Mon, 24 Dec 2007 18:09:25 -0800
-  From: Michael G Schwern <schwern@pobox.com>
+  From: Michael G Schwern <schwern@...>
   To: List - Module-Build <module-build@perl.org>, 
-   Graham Barr <gbarr@pobox.com>
+   Graham Barr <gbarr@...>
   Subject: META.json:  CPAN as a web service
 
   I asked Graham if he'd consider providing META.json auto-conversion for
@@ -57,3 +57,23 @@ to be a quality.
 
   CPAN distribution data is now available as a web service.  Everybody say
   "thank you, Graham"!
+
+=head1 SEE ALSO
+
+(there must be something else to be seen)
+
+=head1 BUGS
+
+Please report bugs via CPAN RT L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-CPAN>
+or L<mailto://bugs-WWW-CPAN@rt.cpan.org>.
+
+=head1 AUTHORS
+
+Adriano R. Ferreira, E<lt>ferreira@cpan.orgE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2007 by Adriano R. Ferreira
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.

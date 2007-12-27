@@ -5,34 +5,29 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
-use parent qw( Class::Accessor );
-__PACKAGE__->mk_accessors( qw( host ua loader ) );
+use Class::Constructor::Factory 0.001;
+use parent qw( Class::Accessor Class::Constructor::Factory );
 
-my $CPAN_HOST = 'search.cpan.org';
+my $FIELDS = {
+  host   => 'search.cpan.org',
+  ua     => defer { # default useragent
+              my %options = ( agent => 'www-cpan/' . $VERSION, );
+              require LWP::UserAgent;
+              return LWP::UserAgent->new( %options );
+            },
+  loader => defer { # default loader
+              require JSON::Any;
+              JSON::Any->import; # XXX JSON::Any needs this
+              return JSON::Any->new;
+            },
+};
 
-sub _default_useragent {
-  my %options = (
-    agent => 'www-cpan/' . $VERSION,
-  );
-  require LWP::UserAgent;
-  return LWP::UserAgent->new( %options );
-}
+__PACKAGE__->mk_constructor0( $FIELDS );
+__PACKAGE__->mk_accessors( keys %$FIELDS );
 
-sub _default_loader {
-  require JSON::Any;
-  JSON::Any->import; # XXX JSON::Any needs this
-  return JSON::Any->new;
-}
-
-sub new {
-  my $obj = shift->SUPER::new(@_);
-  $obj->host( $CPAN_HOST ) if !$obj->host;
-  $obj->ua( _default_useragent() ) if !$obj->ua;
-  $obj->loader( _default_loader() ) if !$obj->loader;
-  return $obj;
-}
+use Carp qw( carp );
 
 my $default;
 sub _default_object {
@@ -90,7 +85,8 @@ sub fetch_distmeta {
   if ( $r->is_success ) {
     return $self->_load_json( $r->content );
   } else {
-    die $r->status_line; # FIXME needs more convincing error handling
+    carp $r->status_line; # FIXME needs more convincing error handling
+    return;
   }
 }
 

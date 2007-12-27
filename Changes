@@ -1,5 +1,11 @@
 Revision history for WWW-CPAN.
 
+0.002    Thu Dec 27 2007
+        - carp and return undef rather than die
+        - more POD
+        - Class::Constructor::Factory is used for generating
+          the constructor with field default values
+
 0.001    Wed Dec 26 2007
         - first CPAN release
         - new() and fetch_distmeta() is the whole API
