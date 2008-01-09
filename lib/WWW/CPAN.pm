@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 use Class::Constructor::Factory 0.001;
 use parent qw( Class::Accessor Class::Constructor::Factory );
@@ -27,22 +27,10 @@ my $FIELDS = {
 __PACKAGE__->mk_constructor0( $FIELDS );
 __PACKAGE__->mk_accessors( keys %$FIELDS );
 
+use Class::Lego::Myself;
+__PACKAGE__->give_my_self;
+
 use Carp qw( carp );
-
-my $default;
-sub _default_object {
-  if ( !$default ) {
-    $default = __PACKAGE__->new();
-  }
-  return $default;
-}
-
-# adapted from Test::Base
-sub _find_my_self {
-  my $self = shift;
-  $self = _default_object() if !ref($self);
-  return $self, @_;
-}
 
 sub _build_distmeta_uri {
   my $self = shift;
@@ -79,7 +67,7 @@ sub _load_json {
 }
 
 sub fetch_distmeta {
-  (my $self, @_) = _find_my_self(@_);
+  (my $self, @_) = &find_my_self;
   my $uri = $self->_build_distmeta_uri(@_);
   my $r = $self->ua->get($uri);
   if ( $r->is_success ) {

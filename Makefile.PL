@@ -14,6 +14,7 @@ WriteMakefile(
     'parent'           => 0,
     'Class::Accessor'  => 0,
     'Class::Constructor::Factory' => 0.001,
+    'Class::Lego::Myself'         => 0.001,
     'Carp'             => 0,
 
     'JSON::Any'        => 0,

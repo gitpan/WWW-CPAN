@@ -1,5 +1,8 @@
 Revision history for WWW-CPAN.
 
+0.003    Wed Jan  9 2008
+        - new dependency on Class::Lego::Myself
+
 0.002    Thu Dec 27 2007
         - carp and return undef rather than die
         - more POD
