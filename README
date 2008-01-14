@@ -7,51 +7,91 @@ SYNOPSIS
       $meta = WWW::CPAN->fetch_distmeta('Error');
 
       $cpan = WWW::CPAN->new;
+      $meta = $cpan->fetch_distmeta('Error');
       $meta = $cpan->fetch_distmeta({ dist => 'Error' });
       $meta = $cpan->fetch_distmeta({ dist => 'Error-0.13', });
       $meta = $cpan->fetch_distmeta({ dist => 'Error', version => '0.13' }); # same as above
       $meta = $cpan->fetch_distmeta({ dist => 'Error', author => 'GBARR', format => 'json' });
 
+      $result = $cpan->query('WWW-CPAN');
+      $result = $cpan->query({ query => 'WWW-CPAN', mode => 'dist' });
+
 DESCRIPTION
-    Blame Schwern.
+    Once upon a time, Schwern waved his hands and Graham implemented a
+    mechanism to get the meta data from CPAN distributions at
+    search.cpan.org.
 
-      [LINK HERE]
+      http://use.perl.org/~schwern/journal/35203
 
-    Just kidding. I just appropriated Schwern's idea and Graham's work. I am
-    lazy -- but that's supposed to be a quality.
+      http://www.mail-archive.com/module-build@perl.org/msg01157.html
 
-    ---
+    This module opportunistically implemented a client for this capability.
+    One day, hopefully this may be useful.
 
-      Message-ID: <47706655.60109@pobox.com>
-      Date: Mon, 24 Dec 2007 18:09:25 -0800
-      From: Michael G Schwern <schwern@...>
-      To: List - Module-Build <module-build@perl.org>, 
-       Graham Barr <gbarr@...>
-      Subject: META.json:  CPAN as a web service
+    A further addition to `WWW::CPAN' API was the `query' method to fetch
+    query data from search.cpan.org. This is done by issuing HTTP requests
+    like
 
-      I asked Graham if he'd consider providing META.json auto-conversion for
-      META.yml files so we can start playing with CPAN data in Javascript.
+      http://search.cpan.org/search?query=Romanize&mode=all&format=xml
 
-      Well here you are:
-      http://search.cpan.org/meta/Error/META.json
+METHODS
+    fetch_distmeta
+          $meta = $cpan->fetch_distmeta($text);
+          $meta = $cpan->fetch_distmeta(\%params);
 
-      Specific versions work:
-      http://search.cpan.org/meta/Error-0.17009/META.json
+        Fetches the meta data (META.yml) of a CPAN distribution.
 
-      You can request the META file as YAML:
-      http://search.cpan.org/meta/Error/META.yml
+        Supported parameters:
 
-      And even ask for information about the last release of a distribution by a
-      particular author.
-      http://search.cpan.org/meta/gbarr/Error/META.yml
+          dist    - the distribution to look for
+          author  - the distribution author
+          version - the distribution version
 
-      As a special bonus feature, Graham added auto generation of META for
-      distributions which don't have them!  For example, that last META file.  It
-      includes bonus information like the CPAN Forum, Testers, Tools and rt.cpan.org
-      resource links.
+    query
+          $res = $cpan->query($text);
+          $res = $cpan->query(\%params);
 
-      CPAN distribution data is now available as a web service.  Everybody say
-      "thank you, Graham"!
+        Performs a query at CPAN and returns it as a (possibly partial)
+        result set. The structure of the result is illustrated by the
+        example below.
+
+          # result of   WWW::CPAN->query({ query => 'CPAN', mode => 'dist', n => 2 })
+          {
+            dist    => [
+                         {
+                           author  => { link => 'http://search.cpan.org/~andk/' },
+                           description
+                                   => 'query, download and build perl modules from CPAN sites ',
+                           link    => 'http://search.cpan.org/author/ANDK/CPAN-1.9205/',
+                           name    => 'CPAN',
+                           released
+                                   => '11th November 2007',
+                           version => 1.9205
+                         },
+                         {
+                           author  => { link => 'http://search.cpan.org/~dons/' },
+                           description
+                                   => 'Download and install CPAN modules upon first use',
+                           link    => 'http://search.cpan.org/author/DONS/CPAN-AutoINC-0.01/',
+                           name    => 'CPAN-AutoINC',
+                           released
+                                   => '22nd June 2004',
+                           version => 0.01
+                         }
+                       ],
+            matches => 108,
+            start   => 1
+         };
+
+        The known parameters of the query are
+
+          query  - what to look for
+          mode   - all | module | dist | author
+          n      - page size (should be <= 100)
+          s      - start
+
+        The maximum page size (`n') is 100. Larger values are reset into
+        100.
 
 SEE ALSO
     (there must be something else to be seen)
@@ -64,7 +104,7 @@ AUTHORS
     Adriano R. Ferreira, <ferreira@cpan.org>
 
 COPYRIGHT AND LICENSE
-    Copyright (C) 2007 by Adriano R. Ferreira
+    Copyright (C) 2007, 2008 by Adriano R. Ferreira
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

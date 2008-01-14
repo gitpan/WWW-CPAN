@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                WWW-CPAN
-version:             0.003
+version:             0.004
 abstract:            CPAN as a web service
 license:             perl
 author:              
@@ -18,6 +18,7 @@ requires:
     strict:                        0
     Test::More:                    0
     warnings:                      0
+    XML::Simple:                   0
 meta-spec:
     url:     http://module-build.sourceforge.net/META-spec-v1.3.html
     version: 1.3

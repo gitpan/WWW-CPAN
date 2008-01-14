@@ -1,5 +1,10 @@
 Revision history for WWW-CPAN.
 
+0.004    Mon Jan 14 2008
+        - query() added to the API
+        - more POD
+        - new dependency on XML::Simple
+
 0.003    Wed Jan  9 2008
         - new dependency on Class::Lego::Myself
 

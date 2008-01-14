@@ -18,6 +18,7 @@ WriteMakefile(
     'Carp'             => 0,
 
     'JSON::Any'        => 0,
+    'XML::Simple'      => 0,
 
     'Test::More'       => 0,
 
