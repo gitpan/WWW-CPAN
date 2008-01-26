@@ -5,31 +5,31 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 use Class::Constructor::Factory 0.001;
 use parent qw( Class::Accessor Class::Constructor::Factory );
 
 my $FIELDS = {
-  host   => 'search.cpan.org',
-  ua     => defer { # default useragent
-              my %options = ( agent => 'www-cpan/' . $VERSION, );
-              require LWP::UserAgent;
-              return LWP::UserAgent->new( %options );
-            },
+  host     => 'search.cpan.org',
+  ua       => defer { # default useragent
+                my %options = ( agent => 'www-cpan/' . $VERSION, );
+                require LWP::UserAgent;
+                return LWP::UserAgent->new( %options );
+              },
   j_loader => defer { # json loader
-              require JSON::Any;
-              JSON::Any->import; # XXX JSON::Any needs this
-              return JSON::Any->new;
-            },
+                require JSON::Any;
+                JSON::Any->import; # XXX JSON::Any needs this
+                return JSON::Any->new;
+              },
   x_loader => defer { # xml loader
-              require XML::Simple;
-              my %options = (
+                require XML::Simple;
+                my %options = (
                   ForceArray => [qw( module dist match )],
                   KeyAttr    => [],
-              );
-              return XML::Simple->new( %options );
-  },
+                );
+                return XML::Simple->new( %options );
+              },
 };
 
 __PACKAGE__->mk_constructor0( $FIELDS );
@@ -71,7 +71,7 @@ sub _build_distmeta_uri {
 sub _load_json {
   my $self = shift;
   my $json = shift;
-  return $self->loader->Load($json);
+  return $self->j_loader->Load($json);
 }
 
 sub fetch_distmeta {
@@ -115,8 +115,8 @@ sub _load_xml {
   return $self->x_loader->XMLin( shift );
 }
 
-sub query {
-  my $self = &find_my_self;
+sub _basic_query {
+  my $self = shift;
   my $uri = $self->_build_query_uri(@_);
   my $r = $self->ua->get($uri);
   if ( $r->is_success ) {
@@ -125,6 +125,11 @@ sub query {
     carp $r->status_line; # FIXME needs more convincing error handling
     return;
   }
+}
+
+sub query {
+  my $self = &find_my_self;
+  return $self->_basic_query(@_);
 }
 
 "I didn't do it! -- Bart Simpson";

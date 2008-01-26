@@ -5,6 +5,11 @@ MANIFEST			This list of files
 
 lib/WWW/CPAN.pm
 lib/WWW/CPAN.pod
+lib/App/WWW/CPAN.pm
+lib/App/WWW/CPAN.pod
+
+bin/cpanq
 
 t/01use.t
+t/10compile.t
 META.yml                                 Module meta-data (added by MakeMaker)

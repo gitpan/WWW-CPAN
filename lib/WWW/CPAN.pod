@@ -109,7 +109,11 @@ are reset into 100.
 
 =head1 SEE ALSO
 
-(there must be something else to be seen)
+  cpanq
+  App::WWW::CPAN
+
+L<cpanq> is a script which illustrates the retrieval capabilities 
+of this module from the command line.
 
 =head1 BUGS
 

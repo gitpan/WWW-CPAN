@@ -3,7 +3,7 @@ use 5.006;
 use ExtUtils::MakeMaker 6.31; # XXX yes, that's not a nice thing to do
 
 WriteMakefile(
-  NAME => 'WWW-CPAN',
+  NAME         => 'WWW-CPAN',
   VERSION_FROM => 'lib/WWW/CPAN.pm',
 
   PREREQ_PM => {
@@ -19,13 +19,15 @@ WriteMakefile(
 
     'JSON::Any'        => 0,
     'XML::Simple'      => 0,
+    'Data::Dump::Streamer' => 0, # required by bin/cpanq
 
     'Test::More'       => 0,
 
   },
-  LICENSE => 'perl',
-  AUTHOR  => 'Adriano R. Ferreira <ferreira@cpan.org>',
+  # recommends => { 'Test::Script' => 0, }
+  EXE_FILES     => [ 'bin/cpanq' ],
+  LICENSE       => 'perl',
+  AUTHOR        => 'Adriano R. Ferreira <ferreira@cpan.org>',
   ABSTRACT_FROM => 'lib/WWW/CPAN.pod',
 
 );
-
