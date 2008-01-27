@@ -117,6 +117,11 @@ of this module from the command line.
 
 =head1 BUGS
 
+In the distribution test F<t/03meta.t>, when using
+C<WWW::CPAN->fetch_distmeta> instead of C<WWW::CPAN->new->fetch_distmeta>,
+the script crashes (look for the "FIXME" item).
+Should be fixed in the next releases (after I understood what's going on).
+
 Please report bugs via CPAN RT L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-CPAN>
 or L<mailto://bugs-WWW-CPAN@rt.cpan.org>.
 

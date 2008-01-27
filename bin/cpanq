@@ -27,7 +27,7 @@ cpanq - A CLI interface to WWW::CPAN
 This script runs a simple interface to execute
 API methods of L<WWW::CPAN> via the command line.
 Currently, this is a work in progress and
-offered more like an example code for c<WWW::CPAN>.
+offered more like an example code for C<WWW::CPAN>.
 
 The actual implementation code lives in the
 module L<App::WWW::CPAN>.
@@ -52,6 +52,11 @@ L<Data::Dump::Streamer> into STDOUT.
 =head1 OPTIONS
 
 (None yet)
+
+=head1 SEE ALSO
+
+  WWW::CPAN
+  App::WWW::CPAN
 
 =head1 BUGS
 

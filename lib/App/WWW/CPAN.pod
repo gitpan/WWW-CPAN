@@ -16,7 +16,7 @@ This module implements the heart of the F<cpanq>
 script, which is a simple interface to run
 API methods of L<WWW::CPAN> via the command line.
 Currently, this is a work in progress and
-offered more like an example code for c<WWW::CPAN>.
+offered more like an example code for C<WWW::CPAN>.
 
 The expected arguments for the script are like:
 
@@ -72,6 +72,10 @@ arguments.
 
 =back
 
+=head1 SEE ALSO
+
+  cpanq
+  WWW::CPAN
 
 =head1 BUGS
 

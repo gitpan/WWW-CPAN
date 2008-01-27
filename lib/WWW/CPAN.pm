@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 use Class::Constructor::Factory 0.001;
 use parent qw( Class::Accessor Class::Constructor::Factory );
@@ -108,7 +108,6 @@ sub _build_query_uri {
   return $uri;
 }
 # other params: s (start), n (page size, should be <= 100)
-# TODO fetch the entire result by default
 
 sub _load_xml {
   my $self = shift;
@@ -131,5 +130,6 @@ sub query {
   my $self = &find_my_self;
   return $self->_basic_query(@_);
 }
+# TODO fetch the entire result by default
 
 "I didn't do it! -- Bart Simpson";

@@ -1,5 +1,8 @@
 Revision history for WWW-CPAN.
 
+0.006    Sun Jan 27 2008
+        - more tests (including a live test)
+
 0.005    Sat Jan 26 2008
         - included a demo script: cpanq
 
