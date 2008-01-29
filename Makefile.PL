@@ -11,6 +11,7 @@ WriteMakefile(
     'warnings'   => 0,
 
     'LWP::UserAgent'   => 0,
+    'URI'              => 0,
     'parent'           => 0,
     'Class::Accessor'  => 0,
     'Class::Constructor::Factory' => 0.001,
@@ -19,12 +20,18 @@ WriteMakefile(
 
     'JSON::Any'        => 0,
     'XML::Simple'      => 0,
-    'Data::Dump::Streamer' => 0, # required by bin/cpanq
+    # required by bin/cpanq
+    'Data::Dump::Streamer' => 0,
+    'Cache::File'          => 0,
+    'File::HomeDir'        => 0,
+    'Path::Class'          => 0,
 
     'Test::More'       => 0,
 
   },
-  # recommends => { 'Test::Script' => 0, }
+  # recommends => { 
+  #       'Test::Script' => 0, 
+  #}
   EXE_FILES     => [ 'bin/cpanq' ],
   LICENSE       => 'perl',
   AUTHOR        => 'Adriano R. Ferreira <ferreira@cpan.org>',

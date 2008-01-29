@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-our $VERSION = '0.005';
+our $VERSION = '0.007';
 
 use App::WWW::CPAN;
 App::WWW::CPAN->new->run(@ARGV);
@@ -48,6 +48,14 @@ and B<meta>.
 
 The results are dumped with the help of
 L<Data::Dump::Streamer> into STDOUT.
+
+=head1 FEATURES
+
+Since 0.007 version, B<cpanq> uses a cache to
+avoid hitting search.cpan.org with the same query
+in a very short time period. This cache lives at
+F<~/.cpanq> (or platform-equivalent home directory).
+The expiration actually happens after 10 minutes.
 
 =head1 OPTIONS
 

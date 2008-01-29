@@ -56,12 +56,14 @@ it returns this first element.
 
 =item B<do_cmd>
 
-  $args->do_cmd( $method, $args );
+  $out = $args->do_cmd( $method, $args );
 
 Given C<$method> is one of C<'query'> or
 C<'fetch_distmeta'>, it evaluates
-C<< WWW::CPAN->$method($args) >> and dumps
-the result.
+C<< WWW::CPAN->$method($args) >> and returns
+the dumped result.
+
+Returns C<undef> on failure.
 
 =item B<run>
 

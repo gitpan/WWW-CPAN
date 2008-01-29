@@ -14,6 +14,8 @@ t/01use.t
 t/10compile.t
 t/02basic.t
 t/03meta.t
+t/98pod-coverage.t
+t/99pod.t
 
 t/lib/Devel/CheckNet.pm
 META.yml                                 Module meta-data (added by MakeMaker)

@@ -3,6 +3,13 @@
 
 use Test::More;
 
+# --no-live-tests to skip this script
+BEGIN {
+  $no_live_tests = grep { $_ eq '--no-live-tests' } @ARGV;
+  plan( skip_all => 'live tests disabled' ) if $no_live_tests;
+
+}
+
 use lib qw( t/lib );
 BEGIN {
   require Devel::CheckNet;
@@ -15,6 +22,8 @@ BEGIN {
 }
 
 use WWW::CPAN ();
+
+diag("live testing with access to http://search.cpan.org");
 
 {
   my $c = WWW::CPAN->new();
@@ -45,7 +54,3 @@ use WWW::CPAN ();
     ok( exists $m->{$field}, "has $field" );
   }
 }
-
-
-
-

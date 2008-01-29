@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.006';
+our $VERSION = '0.007';
 
 use Class::Constructor::Factory 0.001;
 use parent qw( Class::Accessor Class::Constructor::Factory );
@@ -17,18 +17,20 @@ my $FIELDS = {
                 require LWP::UserAgent;
                 return LWP::UserAgent->new( %options );
               },
-  j_loader => defer { # json loader
+  j_loader => defer { # json loader sub
                 require JSON::Any;
                 JSON::Any->import; # XXX JSON::Any needs this
-                return JSON::Any->new;
+                my $j = JSON::Any->new;
+                return sub { $j->Load(shift); }
               },
-  x_loader => defer { # xml loader
+  x_loader => defer { # xml loader sub
                 require XML::Simple;
                 my %options = (
                   ForceArray => [qw( module dist match )],
                   KeyAttr    => [],
                 );
-                return XML::Simple->new( %options );
+                my $x = XML::Simple->new( %options );
+                return sub { $x->XMLin(shift); }
               },
 };
 
@@ -68,18 +70,12 @@ sub _build_distmeta_uri {
   return $uri;
 }
 
-sub _load_json {
-  my $self = shift;
-  my $json = shift;
-  return $self->j_loader->Load($json);
-}
-
 sub fetch_distmeta {
   (my $self, @_) = &find_my_self;
   my $uri = $self->_build_distmeta_uri(@_);
   my $r = $self->ua->get($uri);
   if ( $r->is_success ) {
-    return $self->_load_json( $r->content );
+    return $self->j_loader->( $r->content );
   } else {
     carp $r->status_line; # FIXME needs more convincing error handling
     return;
@@ -109,17 +105,12 @@ sub _build_query_uri {
 }
 # other params: s (start), n (page size, should be <= 100)
 
-sub _load_xml {
-  my $self = shift;
-  return $self->x_loader->XMLin( shift );
-}
-
 sub _basic_query {
   my $self = shift;
   my $uri = $self->_build_query_uri(@_);
   my $r = $self->ua->get($uri);
   if ( $r->is_success ) {
-    return $self->_load_xml( $r->content );
+    return $self->x_loader->( $r->content );
   } else {
     carp $r->status_line; # FIXME needs more convincing error handling
     return;

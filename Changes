@@ -1,5 +1,17 @@
 Revision history for WWW-CPAN.
 
+0.007   Tue Jan 29 2008
+        - minor internal change to load JSON/XML
+        - cpanq does not display "$VAR1 = undef"
+          on errors anymore
+        - cpanq now uses a cache
+        - the live test t/03meta.t announces itself
+        - t/03meta.t can be skipped (given an argument
+          --no-live-tests)
+        - added t/98pod-coverage.t and t/99pod.t
+        - added forgotten dependency on URI 
+          (thanks, CPANTS!)
+
 0.006    Sun Jan 27 2008
         - more tests (including a live test)
 
