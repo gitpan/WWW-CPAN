@@ -1,5 +1,10 @@
 Revision history for WWW-CPAN.
 
+0.008   Tue Feb 19 2008
+        - update dependency: Class::Constructor::Factory 
+          renamed to Class::Lego::Constructor
+        - usage pattern of Class::Lego::Constructor updated
+
 0.007   Tue Jan 29 2008
         - minor internal change to load JSON/XML
         - cpanq does not display "$VAR1 = undef"

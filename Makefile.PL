@@ -14,7 +14,7 @@ WriteMakefile(
     'URI'              => 0,
     'parent'           => 0,
     'Class::Accessor'  => 0,
-    'Class::Constructor::Factory' => 0.001,
+    'Class::Lego::Constructor' => 0.004,
     'Class::Lego::Myself'         => 0.001,
     'Carp'             => 0,
 

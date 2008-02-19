@@ -5,25 +5,25 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.007';
+our $VERSION = '0.008';
 
-use Class::Constructor::Factory 0.001;
-use parent qw( Class::Accessor Class::Constructor::Factory );
+use Class::Lego::Constructor 0.004 ();
+use parent qw( Class::Accessor Class::Lego::Constructor );
 
 my $FIELDS = {
   host     => 'search.cpan.org',
-  ua       => defer { # default useragent
+  ua       => sub { # default useragent
                 my %options = ( agent => 'www-cpan/' . $VERSION, );
                 require LWP::UserAgent;
                 return LWP::UserAgent->new( %options );
               },
-  j_loader => defer { # json loader sub
+  j_loader => sub { # json loader sub
                 require JSON::Any;
                 JSON::Any->import; # XXX JSON::Any needs this
                 my $j = JSON::Any->new;
                 return sub { $j->Load(shift); }
               },
-  x_loader => defer { # xml loader sub
+  x_loader => sub { # xml loader sub
                 require XML::Simple;
                 my %options = (
                   ForceArray => [qw( module dist match )],
