@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.007';
+our $VERSION = '0.009'; # XXX
 
 use parent qw( Class::Accessor );
 
@@ -14,6 +14,7 @@ __PACKAGE__->mk_accessors(qw( cpan home cache ));
 use WWW::CPAN ();
 use Data::Dump::Streamer qw( Dump );
 use Path::Class qw( dir file );
+use Pod::Usage;
 
 sub parse_args {
   my $self = shift;
@@ -76,8 +77,10 @@ sub _retrieve {
 }
 
 my %method_for = (
-   'meta'  => 'fetch_distmeta',
-   'query' => 'query',
+   'meta'     => 'fetch_distmeta',
+   'distmeta' => 'fetch_distmeta',
+   'query'    => 'search',
+   'search'   => 'search'
 );
 
 sub run {
@@ -85,6 +88,10 @@ sub run {
   $self->home( _home );
   $self->cache( $self->_cache );
   $self->cpan( WWW::CPAN->new );
+
+  if ( @_ == 0 ) {
+    pod2usage(1);
+  }
 
   if ( defined( my $c = $self->_retrieve( \@_ ) ) ) {
     #warn "cache hit\n";

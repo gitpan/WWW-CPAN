@@ -23,11 +23,13 @@ The expected arguments for the script are like:
   command single-arg
   command key1=val1 key2=val2
 
-where the supported commands by now are B<query>
-and B<meta>.
+where the supported commands by now are B<search>
+and B<meta>. There is also the synonym commands:
+B<query> which is the same as B<search> and
+B<distmeta> an alias of B<meta>.
 
-  query Foo # translates to WWW::CPAN->query('Foo')
-  query query=File::Temp mode=all # WWW::CPAN->query({ query => 'File::Temp', mode => 'all' });
+  search Foo # translates to WWW::CPAN->search('Foo')
+  search query=File::Temp mode=all # WWW::CPAN->search({ query => 'File::Temp', mode => 'all' });
 
   meta Foo # WWW::CPAN->fetch_distmeta('Foo');
   meta dist=WWW-CPAN version=0.003 # WWW::CPAN->fetch_distmeta({ dist => 'WWW-CPAN', version => '0.003' })

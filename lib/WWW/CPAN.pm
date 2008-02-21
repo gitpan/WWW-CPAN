@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.008';
+our $VERSION = '0.009'; # XXX
 
 use Class::Lego::Constructor 0.004 ();
 use parent qw( Class::Accessor Class::Lego::Constructor );
@@ -117,10 +117,15 @@ sub _basic_query {
   }
 }
 
-sub query {
+sub search {
   my $self = &find_my_self;
   return $self->_basic_query(@_);
 }
 # TODO fetch the entire result by default
+
+# &query is an alias to &search (see Method::Alias for the rationale)
+sub query { 
+  goto &{ $_[0]->can('search') }; 
+}
 
 "I didn't do it! -- Bart Simpson";

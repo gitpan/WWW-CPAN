@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                WWW-CPAN
-version:             0.008
+version:             0.009
 abstract:            CPAN as a web service
 license:             perl
 author:              
@@ -19,6 +19,7 @@ requires:
     LWP::UserAgent:                0
     parent:                        0
     Path::Class:                   0
+    Pod::Usage:                    0
     strict:                        0
     Test::More:                    0
     URI:                           0

@@ -25,6 +25,7 @@ WriteMakefile(
     'Cache::File'          => 0,
     'File::HomeDir'        => 0,
     'Path::Class'          => 0,
+    'Pod::Usage'           => 0,
 
     'Test::More'       => 0,
 

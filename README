@@ -13,8 +13,8 @@ SYNOPSIS
       $meta = $cpan->fetch_distmeta({ dist => 'Error', version => '0.13' }); # same as above
       $meta = $cpan->fetch_distmeta({ dist => 'Error', author => 'GBARR', format => 'json' });
 
-      $result = $cpan->query('WWW-CPAN');
-      $result = $cpan->query({ query => 'WWW-CPAN', mode => 'dist' });
+      $result = $cpan->search('WWW-CPAN');
+      $result = $cpan->search({ query => 'WWW-CPAN', mode => 'dist' });
 
 DESCRIPTION
     Once upon a time, Schwern waved his hands and Graham implemented a
@@ -28,7 +28,7 @@ DESCRIPTION
     This module opportunistically implemented a client for this capability.
     One day, hopefully this may be useful.
 
-    A further addition to `WWW::CPAN' API was the `query' method to fetch
+    A further addition to `WWW::CPAN' API was the `search' method to fetch
     query data from search.cpan.org. This is done by issuing HTTP requests
     like
 
@@ -47,15 +47,15 @@ METHODS
           author  - the distribution author
           version - the distribution version
 
-    query
-          $res = $cpan->query($text);
-          $res = $cpan->query(\%params);
+    search
+          $res = $cpan->search($text);
+          $res = $cpan->search(\%params);
 
         Performs a query at CPAN and returns it as a (possibly partial)
         result set. The structure of the result is illustrated by the
         example below.
 
-          # result of   WWW::CPAN->query({ query => 'CPAN', mode => 'dist', n => 2 })
+          # result of   WWW::CPAN->search({ query => 'CPAN', mode => 'dist', n => 2 })
           {
             dist    => [
                          {
@@ -93,10 +93,25 @@ METHODS
         The maximum page size (`n') is 100. Larger values are reset into
         100.
 
+    query
+          $res = $cpan->query($text);
+          $res = $cpan->query(\%params);
+
+        This is a method alias to search. It works just the same.
+
 SEE ALSO
-    (there must be something else to be seen)
+      cpanq
+      App::WWW::CPAN
+
+    cpanq is a script which illustrates the retrieval capabilities of this
+    module from the command line.
 
 BUGS
+    In the distribution test t/03meta.t, when using
+    `WWW::CPAN->fetch_distmeta' instead of `WWW::CPAN->new->fetch_distmeta',
+    the script crashes (look for the "FIXME" item). Should be fixed in the
+    next releases (after I understood what's going on).
+
     Please report bugs via CPAN RT
     http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-CPAN or mailto:.
 

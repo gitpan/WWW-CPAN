@@ -1,5 +1,16 @@
 Revision history for WWW-CPAN.
 
+0.009   Thu Feb 21 2008
+        - 'search' is now the preferred name of 'query'
+          in WWW:CPAN API
+        - in cpanq, 'search' is now the preferred name
+          of 'query' command
+        - in cpanq, 'distmeta' is a synonym of 'meta'
+          command
+        - cpanq now produces a usage message when
+          no arguments are given
+        - Pod::Usage is now a prereq
+
 0.008   Tue Feb 19 2008
         - update dependency: Class::Constructor::Factory 
           renamed to Class::Lego::Constructor
