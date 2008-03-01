@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.009'; # XXX
+our $VERSION = '0.011';
 
 use parent qw( Class::Accessor );
 
@@ -48,11 +48,11 @@ sub _home {
 
 sub _cache {
   my $self = shift;
-  require Cache::File;
-  return Cache::File->new( 
-              cache_root => dir( $self->home, 'cache' ),
-              default_expires => '10 minutes',
-  );
+  require Cache::FileCache;
+  return Cache::FileCache->new({
+              default_expires_in => '10 minutes',
+              cache_root => dir( $self->home, 'cache2' ),
+  });
 }
 
 # save last arguments and answer

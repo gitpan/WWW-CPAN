@@ -23,7 +23,7 @@ WriteMakefile(
     'XML::Simple'      => 0,
     # required by bin/cpanq
     'Data::Dump::Streamer' => 0,
-    'Cache::File'          => 0,
+    'Cache::FileCache'     => 0,
     'File::HomeDir'        => 0,
     'Path::Class'          => 0,
     'Pod::Usage'           => 0,

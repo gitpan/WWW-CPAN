@@ -1,5 +1,10 @@
 Revision history for WWW-CPAN.
 
+0.011   Sat Mar  1 2008
+        - try Cache::FileCache rather than Cache::File:
+          it seems to work on Windows (at least more than
+          Cache::File does)
+
 0.010   Sat Mar  1 2008
         - experiment LWP::UserAgent::Determined to get
           rid of some failures in live test

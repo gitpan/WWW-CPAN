@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                WWW-CPAN
-version:             0.010
+version:             0.011
 abstract:            CPAN as a web service
 license:             perl
 author:              
@@ -8,7 +8,7 @@ author:
 generated_by:        ExtUtils::MakeMaker version 6.42
 distribution_type:   module
 requires:     
-    Cache::File:                   0
+    Cache::FileCache:              0
     Carp:                          0
     Class::Accessor:               0
     Class::Lego::Constructor:      0.004
