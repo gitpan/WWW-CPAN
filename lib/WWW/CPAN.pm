@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.009'; # XXX
+our $VERSION = '0.010'; 
 
 use Class::Lego::Constructor 0.004 ();
 use parent qw( Class::Accessor Class::Lego::Constructor );
@@ -14,8 +14,10 @@ my $FIELDS = {
   host     => 'search.cpan.org',
   ua       => sub { # default useragent
                 my %options = ( agent => 'www-cpan/' . $VERSION, );
-                require LWP::UserAgent;
-                return LWP::UserAgent->new( %options );
+#                require LWP::UserAgent;
+#                return LWP::UserAgent->new( %options );
+                require LWP::UserAgent::Determined;
+                return LWP::UserAgent::Determined->new( %options );
               },
   j_loader => sub { # json loader sub
                 require JSON::Any;

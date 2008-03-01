@@ -1,5 +1,15 @@
 Revision history for WWW-CPAN.
 
+0.010   Sat Mar  1 2008
+        - experiment LWP::UserAgent::Determined to get
+          rid of some failures in live test
+        - dependency on LWP::UserAgent replaced by 
+          L::UA::Determined for now
+        - nope, it won't help: search.cpan.org is playing
+          tricks on me - the META.json of CPAN
+          is auto-generated sometimes instead of
+          being the one extracted from the current dist
+
 0.009   Thu Feb 21 2008
         - 'search' is now the preferred name of 'query'
           in WWW:CPAN API

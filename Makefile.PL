@@ -10,7 +10,8 @@ WriteMakefile(
     'strict'     => 0,
     'warnings'   => 0,
 
-    'LWP::UserAgent'   => 0,
+#    'LWP::UserAgent'   => 0,
+    'LWP::UserAgent::Determined' => 0,
     'URI'              => 0,
     'parent'           => 0,
     'Class::Accessor'  => 0,
